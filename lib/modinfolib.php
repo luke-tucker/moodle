@@ -1079,7 +1079,8 @@ class cm_info extends stdClass {
         $userid = $this->modinfo->get_user_id();
         $this->uservisible = true;
         if ((!$this->visible or !$this->available) and
-                !has_capability('moodle/course:viewhiddenactivities', $modcontext, $userid)) {
+                !has_capability('moodle/course:viewhiddenactivities', $modcontext, $userid)
+                and (empty($CFG->enablegroupmembersonly) or empty($this->groupmembersonly))) {
             // If the activity is hidden or unavailable, and you don't have viewhiddenactivities,
             // set it so that user can't see or access it
             $this->uservisible = false;
@@ -1090,6 +1091,8 @@ class cm_info extends stdClass {
             if (empty($groups)) {
                 // ...and you don't belong to a group, then set it so you can't see/access it
                 $this->uservisible = false;
+                // ensure activity is completely hidden from user
+                $this->showavailability = 0;
             }
         }
     }
