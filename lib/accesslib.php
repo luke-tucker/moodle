@@ -1955,7 +1955,7 @@ function is_enrolled(context $context, $user = null, $withcapability = '', $only
 
     if ($coursecontext->instanceid == SITEID) {
         // everybody participates on frontpage
-    } else {
+    } else if(!$withcapability)  {
         // try cached info first - the enrolled flag is set only when active enrolment present
         if ($USER->id == $userid) {
             $coursecontext->reload_if_dirty();
