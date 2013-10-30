@@ -4066,7 +4066,7 @@ class assign {
         global $CFG;
 
         $info = new stdClass();
-        if ($blindmarking) {
+        if ($blindmarking && $messagetype == 'gradersubmissionupdated') {
             $info->username = get_string('participant', 'assign') . ' ' . $uniqueidforuser;
             $userfrom->firstname = get_string('participant', 'assign');
             $userfrom->lastname = $uniqueidforuser;
