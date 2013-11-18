@@ -2460,7 +2460,8 @@ class global_navigation extends navigation_node {
                 $filterselect = $currentgroup;
             }
             $filterselect = clean_param($filterselect, PARAM_INT);
-            if (($CFG->bloglevel == BLOG_GLOBAL_LEVEL or ($CFG->bloglevel == BLOG_SITE_LEVEL and (isloggedin() and !isguestuser())))
+            if (!empty($CFG->enableblogs)
+               and ($CFG->bloglevel == BLOG_GLOBAL_LEVEL or ($CFG->bloglevel == BLOG_SITE_LEVEL and (isloggedin() and !isguestuser())))
                and has_capability('moodle/blog:view', context_system::instance())) {
                 $blogsurls = new moodle_url('/blog/index.php', array($filtervar => $filterselect));
                 $participants->add(get_string('blogscourse','blog'), $blogsurls->out());
