@@ -74,6 +74,11 @@ class qbehaviour_adaptive_walkthrough_test extends qbehaviour_walkthrough_test_b
         return new question_no_pattern_expectation('/'.preg_quote($penaltyinfo, '/').'/');
     }
 
+    protected function get_contains_changed_info_expectation() {
+        $changedinfo = get_string('answerchanged', 'qbehaviour_adaptive');
+        return new question_pattern_expectation('/'.preg_quote($changedinfo, '/').'/');
+    }
+
     public function test_adaptive_multichoice() {
 
         // Create a multiple choice, single response question.
@@ -709,7 +714,7 @@ class qbehaviour_adaptive_walkthrough_test extends qbehaviour_walkthrough_test_b
                 $this->get_does_not_contain_penalty_info_expectation(),
                 $this->get_does_not_contain_total_penalty_expectation(),
                 $this->get_contains_validation_error_expectation(),
-                $this->get_contains_disregarded_info_expectation());
+                $this->get_contains_changed_info_expectation());
 
         // Submit the correct answer.
         $this->process_submission(array('-submit' => 1, 'answer' => '3.14'));
@@ -739,7 +744,7 @@ class qbehaviour_adaptive_walkthrough_test extends qbehaviour_walkthrough_test_b
                 $this->get_does_not_contain_penalty_info_expectation(),
                 $this->get_does_not_contain_total_penalty_expectation(),
                 $this->get_contains_validation_error_expectation(),
-                $this->get_contains_disregarded_info_expectation());
+                $this->get_contains_changed_info_expectation());
 
         // Finish the attempt.
         $this->quba->finish_all_questions();

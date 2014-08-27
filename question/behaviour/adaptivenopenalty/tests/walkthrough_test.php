@@ -56,6 +56,11 @@ class qbehaviour_adaptivenopenalty_walkthrough_test extends qbehaviour_walkthrou
         return new question_no_pattern_expectation($penaltypattern);
     }
 
+    protected function get_contains_changed_info_expectation() {
+        $changedinfo = get_string('answerchanged', 'qbehaviour_adaptive');
+        return new question_pattern_expectation('/'.preg_quote($changedinfo, '/').'/');
+    }
+
     public function test_multichoice() {
 
         // Create a multiple choice, single response question.
@@ -270,7 +275,7 @@ class qbehaviour_adaptivenopenalty_walkthrough_test extends qbehaviour_walkthrou
                 $this->get_contains_submit_button_expectation(true),
                 $this->get_does_not_contain_correctness_expectation(),
                 $this->get_contains_validation_error_expectation(),
-                $this->get_does_not_contain_gradingdetails_expectation());
+                $this->get_contains_changed_info_expectation());
 
         // Submit the correct answer.
         $this->process_submission(array('-submit' => 1, 'answer' => '3.14'));
@@ -295,7 +300,7 @@ class qbehaviour_adaptivenopenalty_walkthrough_test extends qbehaviour_walkthrou
                 $this->get_contains_submit_button_expectation(true),
                 $this->get_does_not_contain_correctness_expectation(),
                 $this->get_contains_validation_error_expectation(),
-                $this->get_does_not_contain_gradingdetails_expectation());
+                $this->get_contains_changed_info_expectation());
 
         // Finish the attempt.
         $this->quba->finish_all_questions();

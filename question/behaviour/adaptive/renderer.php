@@ -43,6 +43,20 @@ class qbehaviour_adaptive_renderer extends qbehaviour_renderer {
 
     public function feedback(question_attempt $qa, question_display_options $options) {
 
+        // Find previous attempt where user has submitted answer.
+        $attempted = false;
+        $answerstep = $qa->get_last_step_with_behaviour_var('_try');
+        if ($answerstep->get_state()->is_active() && $answerstep->get_qt_var('answer') != null) {
+            $attempted = true;
+        }
+
+        // If previous attempt for question exists but current state does not have a _try behaviour then the user has
+        // updated their answer without submitting, in this case display feedback advising answer has changed.
+        if ($attempted == true && $qa->get_last_step()->get_behaviour_var('_try') == null) {
+            return html_writer::nonempty_tag('div', get_string('answerchanged', 'qbehaviour_adaptive'),
+                array('class' => 'gradingdetails'));
+        }
+
         // If the latest answer was invalid, display an informative message.
         if ($qa->get_state() == question_state::$invalid) {
             return html_writer::nonempty_tag('div', $this->disregarded_info(),

@@ -23,6 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['answerchanged'] = 'Answer has changed since last submitted.';
 $string['disregardedwithoutpenalty'] = 'The submission was invalid, and has been disregarded without penalty.';
 $string['gradingdetails'] = 'Marks for this submission: {$a->raw}/{$a->max}.';
 $string['gradingdetailswithadjustment'] = 'Marks for this submission: {$a->raw}/{$a->max}. Accounting for previous tries, this gives <strong>{$a->cur}/{$a->max}</strong>.';

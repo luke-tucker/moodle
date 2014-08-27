@@ -78,7 +78,7 @@ class qbehaviour_adaptive extends question_behaviour_with_multiple_tries {
 
         // Then, if they have just Checked an answer, show them the applicable bits of feedback.
         if (!$this->qa->get_state()->is_finished() &&
-                $this->qa->get_last_behaviour_var('_try')) {
+                $this->qa->get_last_step()->get_behaviour_var('_try') ) {
             $options->feedback        = $save->feedback;
             $options->correctness     = $save->correctness;
             $options->numpartscorrect = $save->numpartscorrect;
