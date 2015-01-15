@@ -97,6 +97,9 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
             if (move) {
                 move.replace(this.resourcedraghandle.cloneNode(true));
             }
+            new Y.DD.Drop({
+                node: resourcesnode
+            });
         }, this);
     },
 
